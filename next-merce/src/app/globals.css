@@ -223,3 +223,8 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Product breadcrumb bar (demo.nextmerce.com shop details) */
+.shadow-breadcrumb {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+}

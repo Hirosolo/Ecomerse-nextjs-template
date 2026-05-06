@@ -1,6 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
+
+import { NewsletterSection } from "@/components/store/newsletter-section";
+import { SiteFooter } from "@/components/store/site-footer";
 
 const SANITY = "https://cdn.sanity.io/images/rpq7htxl/production";
 const sanityImg = (file: string) => `${SANITY}/${file}`;
@@ -62,7 +66,13 @@ const categoryTiles = [
 ];
 
 const newArrivalProducts = [
-  { name: "Portable Electric Grinder Maker", price: 777, oldPrice: 888, image: sanityImg("e5c57afcfb88cd4f47f0b7b177669b7489b2b4cb-570x512.png") },
+  {
+    name: "Portable Electric Grinder Maker",
+    price: 777,
+    oldPrice: 888,
+    image: sanityImg("e5c57afcfb88cd4f47f0b7b177669b7489b2b4cb-570x512.png"),
+    slug: "portable-electric-grinder-maker",
+  },
   { name: "Indoor Steel Adjustable Silent Treadmill Home Fitness", price: 888, oldPrice: 999, image: sanityImg("2be620f7ac309ca4d821aaa974acce33cc573274-570x512.png") },
   { name: "Rangs 43 Inch Frameless FHD Double Glass Android TV", price: 700, oldPrice: 800, image: sanityImg("0b215fcdd92c0e533b052a09660ce01c5e5f6b9a-570x512.png") },
   { name: "iPhone 16 Pro Max", price: 899, oldPrice: 930, image: sanityImg("51bf79d5b889ae69a97e0a04434606c0947d8b5f-570x512.webp") },
@@ -209,10 +219,10 @@ export default function Page() {
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 xl:px-0">
           <div className="flex flex-col gap-5 py-6 ease-out duration-200 lg:flex-row lg:items-center lg:justify-between xl:justify-between xl:gap-8">
             <div className="flex w-full flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-10 xl:w-auto">
-              <a href="#" className="shrink-0">
+              <Link href="/" className="shrink-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/logo/logo.svg" alt="Logo" width={165} height={36} className="h-9 w-auto" />
-              </a>
+              </Link>
               <div className="w-full max-w-[475px]">
                 <form onSubmit={(e) => e.preventDefault()}>
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-2">
@@ -463,10 +473,10 @@ export default function Page() {
               {newArrivalProducts.map((p) => (
                 <div key={p.name} className="group">
                   <div className="relative mb-4 flex min-h-[270px] items-center justify-center overflow-hidden rounded-lg border border-gray-2 bg-[#F6F7FB]">
-                    <a href="#">
+                    <Link href={p.slug ? `/products/${p.slug}` : "#"}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={p.image} alt={p.name} width={250} height={250} className="object-contain" />
-                    </a>
+                    </Link>
                     <div className="absolute bottom-0 left-0 flex w-full translate-y-full justify-center gap-2.5 pb-5 duration-200 ease-linear group-hover:translate-y-0">
                       <button type="button" aria-label="button for quick view" className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-dark shadow-lg duration-200 ease-out hover:text-blue">
                         <i className="fas fa-eye w-5 text-sm" aria-hidden />
@@ -485,9 +495,9 @@ export default function Page() {
                   </div>
                   <div>
                     <h3 className="mb-2 line-clamp-2 text-custom-sm font-medium text-dark">
-                      <a href="#" className="hover:text-blue">
+                      <Link href={p.slug ? `/products/${p.slug}` : "#"} className="hover:text-blue">
                         {p.name}
-                      </a>
+                      </Link>
                     </h3>
                     <div className="flex items-center gap-2">
                       <span className="text-lg font-semibold text-[#57585D]">${p.oldPrice}</span>
@@ -646,68 +656,9 @@ export default function Page() {
           </div>
         </section>
 
-        <section className="newsletter-bg py-16 text-white">
-          <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 xl:px-0">
-            <h2 className="text-2xl font-bold md:text-3xl">Don&apos;t Miss Out Latest Trends & Offers</h2>
-            <p className="mb-8 mt-3 text-blue-100">Register to receive news about the latest offers & discount codes</p>
-            <form className="mx-auto flex max-w-lg flex-col gap-3 sm:flex-row sm:gap-3" onSubmit={(e) => { e.preventDefault(); alert("Thanks!"); }}>
-              <input type="email" required placeholder="Enter your email" className="h-[52px] flex-1 rounded-md border-none px-5 text-gray-900 shadow-sm outline-none focus:ring-2 focus:ring-white/50" />
-              <button type="submit" className="rounded-md bg-dark px-8 py-3 font-semibold text-white hover:opacity-90">
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </section>
+        <NewsletterSection />
 
-        <footer className="bg-black text-gray-300">
-          <div className="mx-auto grid max-w-7xl gap-12 border-b border-white/15 px-4 py-14 md:grid-cols-2 xl:grid-cols-4">
-            <div className="text-center xl:text-left">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/logo/logo.svg" alt="" className="mx-auto mb-8 h-9 w-auto xl:mx-0" />
-              <h4 className="mb-8 text-xl font-semibold capitalize text-[#eae4e4]">Help & Support</h4>
-              <ul className="space-y-5 text-[15px] font-medium text-[#eae4e4] xl:px-4">
-                <li className="flex justify-center gap-3 xl:justify-start">
-                  <i className="fas fa-map-marker-alt mt-1 text-blue shrink-0" aria-hidden />685 Market Street,Las Vegas, LA 95820,United States.
-                </li>
-                <li className="flex justify-center gap-3 xl:justify-start">
-                  <i className="fas fa-phone mt-1 text-blue shrink-0" aria-hidden /><a href="tel:+0995327869843" className="underline hover:text-white">(+099) 532-786-9843</a>
-                </li>
-                <li className="flex justify-center gap-3 xl:justify-start"><i className="fas fa-envelope mt-1 text-blue shrink-0" aria-hidden /><a href="mailto:support@example.com" className="underline hover:text-white">support@example.com</a></li>
-              </ul>
-              <div className="mt-10 flex justify-center gap-6 text-xl xl:justify-start">
-                {(["fab fa-facebook-f", "fab fa-twitter", "fab fa-instagram", "fab fa-linkedin-in"] as const).map((c) => (
-                  <a key={c} href="#" className="text-[#eae4e4] hover:text-blue"><i className={c} aria-hidden /></a>
-                ))}
-              </div>
-            </div>
-            <div className="text-center md:text-left">
-              <h4 className="mb-8 text-xl font-semibold capitalize text-[#eae4e4]">Account</h4>
-              <ul className="space-y-4 text-[15px]">{["Login / Register", "Cart", "Wishlist", "Shop"].map((x) => <li key={x}><a href="#" className="hover:text-white">{x}</a></li>)}</ul>
-            </div>
-            <div className="text-center md:text-left">
-              <h4 className="mb-8 text-xl font-semibold capitalize text-[#eae4e4]">Quick Link</h4>
-              <ul className="space-y-4 text-[15px]">{["Privacy Policy", "Refund Policy", "Terms of Use", "FAQ's", "Contact"].map((x) => <li key={x}><a href="#" className="hover:text-white">{x}</a></li>)}</ul>
-            </div>
-            <div className="text-center xl:text-left">
-              <h4 className="mb-2 text-xl font-semibold capitalize text-[#eae4e4]">Download App</h4>
-              <p className="text-[15px] uppercase tracking-wide text-[#eae4e4]">Save $3 With App & New User only</p>
-              <div className="mt-6 flex justify-center gap-4 xl:justify-start">
-                <a href="#"><img src={`${SANITY}/b2669d03f86219c8b49fcead04fa6bb8f1dc169d-81x51.png`} alt="" className="h-10 w-auto" /></a>
-                <a href="#"><img src={`${SANITY}/71de8e3fb7e6f757e0716825b945ef6e47ced708-74x74.png`} alt="" className="h-12 w-auto" /></a>
-              </div>
-            </div>
-          </div>
-          <div className="mx-auto flex max-w-7xl flex-col-reverse items-center justify-between gap-6 border-t border-white/25 px-4 py-8 text-sm sm:flex-row">
-            <p className="text-[#eae4e4]">© 2026 . All rights reserved by <a href="#" className="text-blue hover:underline">Pimjo</a> .</p>
-            <div className="flex flex-wrap items-center justify-center gap-4 text-2xl text-[#eae4e4]">
-              <span className="mr-2 text-lg font-semibold capitalize">We Accept:</span>
-              <i className="fab fa-cc-visa hover:text-white" aria-hidden />
-              <i className="fab fa-cc-mastercard hover:text-white" aria-hidden />
-              <i className="fab fa-cc-paypal hover:text-white" aria-hidden />
-              <i className="fab fa-cc-apple-pay hover:text-white" aria-hidden />
-            </div>
-          </div>
-        </footer>
+        <SiteFooter />
 
         {cartDrawerMounted && (
           <div className="fixed inset-0 z-[9999] flex justify-end bg-black/50">
